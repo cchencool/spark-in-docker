@@ -33,10 +33,10 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - "/home/docker/data:/data"
+      - "/home/docker/data:/data" # accesses an arbitrary directory in the host’s file system as /data inside the container, which is where Redis stores data.
     deploy:
       placement:
-        constrains: [node.role == manager]
+        constraints: [node.role == manager] # always runs on the manager, so it’s always using the same filesystem.
     command: redis-server --appendonly yes
     networks:
       - webnet
