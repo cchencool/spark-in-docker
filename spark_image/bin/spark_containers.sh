@@ -2,10 +2,6 @@
 
 cmd=${1:-"usage"}
 
-# default 3 slaves
-N=${N:-3}
-version=${version:-0.2}
-
 dir=`dirname $0`
 filename=$(basename $0)
 

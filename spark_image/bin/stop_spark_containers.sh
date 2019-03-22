@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# default 3 slaves
-N=${N:-3}
-version=${version:-0.2}
-
 check_succ()
 {
     if [[ $? -eq 0 ]]; then

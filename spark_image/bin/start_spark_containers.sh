@@ -2,7 +2,7 @@
 
 # default 3 slaves
 N=${N:-3}
-version=${version:-0.2}
+version=${version:-1.0}
 
 check_succ()
 {
