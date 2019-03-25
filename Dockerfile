@@ -1,6 +1,7 @@
 FROM ubuntu:18.04 
 
 RUN mkdir /root/install
+RUN mkdir /root/workspace
 WORKDIR /root/install
 
 EXPOSE 7077
@@ -25,6 +26,7 @@ ADD . .
 
 # ********************************************
 # ** install jdk & spark through local file **
+# TODO: for big data, may need to install hadoop
 ENV WORKDIR="/root/install"
 ENV PKG_DIR="/root/install/pkg"
 RUN mkdir /opt/jdk && \
@@ -39,8 +41,6 @@ RUN mkdir /opt/spark && \
 
 ENV JAVA_HOME="/opt/jdk"
 ENV SPARK_HOME="/opt/spark"
-# ENV PYSPARK_DRIVER_PYTHON="jupyter"
-# ENV PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 
 RUN echo "export JAVA_HOME=${JAVA_HOME}" >> $SPARK_HOME/sbin/spark-config.sh
 RUN echo 'alias python=python3' >> ~/.bashrc && \
@@ -48,8 +48,6 @@ RUN echo 'alias python=python3' >> ~/.bashrc && \
     echo "export PYSPARK_PYTHON=`which python3`" >> ~/.bashrc && \
     echo "export JAVA_HOME=${JAVA_HOME}" >> ~/.bashrc && \
     echo "export SPARK_HOME=${SPARK_HOME}" >> ~/.bashrc && \
-    echo "export PYSPARK_DRIVER_PYTHON='jupyter'" >> ~/.bashrc && \
-    echo "export PYSPARK_DRIVER_PYTHON_OPTS='notebook'" >> ~/.bashrc && \
     echo 'export PATH="${JAVA_HOME}/bin:${SPARK_HOME}/bin:${SPARK_HOME}/sbin:${PATH}"' >> ~/.bashrc
 # ********************************************
 
@@ -58,7 +56,7 @@ RUN cp ${WORKDIR}/config/ssh_config ~/.ssh/config && \
     cp ${WORKDIR}/config/slaves ${SPARK_HOME}/conf/slaves
 
 # install other python packages
-RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
+RUN pip3 install --trusted-host pypi.python.org -r ./config/requirements.txt
 
 # config jupyter
 RUN jupyter notebook --generate-config && \
@@ -78,6 +76,8 @@ RUN jupyter notebook --generate-config && \
 # 
 # ********************************************
 
+# change workdir
+WORKDIR /root/workspace
 # start ssh service
 # CMD service ssh start && bash
 CMD ["sh", "-c", "service ssh start; bash"]

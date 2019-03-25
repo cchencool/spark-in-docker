@@ -1,0 +1,59 @@
+version: "3"
+
+services:
+
+  master:
+   image: cchencool/spark:1.0
+   command: [ "sh", "-c", "source ~/.bashrc; service ssh start; /opt/spark/sbin/start-master.sh -h master > log; bash" ]
+   hostname: master
+   tty: true
+   networks: 
+     - spark-net
+   environment: 
+     MASTER: spark://master:7077
+     SPARK_PUBLIC_DNS: ${EXTERNAL_IP}
+   deploy:
+     placement:
+       constraints: [node.role == manager]
+     resources:
+       limits:
+         cpus: "0.5" # each instance at most 10% of cpu
+         memory: 1024M
+    #  restart_policy:
+    #    condition: on-failure # immediately restart container if one fails;
+   ports:
+     - 4040:4040
+     - 6066:6066
+     - 7077:7077
+     - 8080:8080
+
+  worker:
+    image: cchencool/spark:1.0
+    command: [ "sh", "-c", "source ~/.bashrc; service ssh start; /opt/spark/sbin/start-slave.sh spark://master:7077 > log; bash" ]
+    tty: true
+    hostname: worker
+    environment: 
+      # SPARK_WORKER_CORES: 2
+      # SPARK_WORKER_MEMORY: 1g
+      SPARK_PUBLIC_DNS: ${EXTERNAL_IP}
+    networks: 
+      - spark-net
+    depends_on: 
+      - master
+    deploy:
+      replicas: 2 
+      placement:
+        constraints: [node.role == worker]
+      resources:
+        limits:
+          cpus: "0.5" # each instance at most 10% of cpu
+          memory: 1024M
+     #  restart_policy:
+     #    condition: on-failure # immediately restart container if one fails;
+    ports:
+      - 8081:8081
+
+networks:
+  spark-net:
+    driver: overlay
+

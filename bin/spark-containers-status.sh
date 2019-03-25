@@ -16,7 +16,7 @@ fi
 # check docker network
 net=`docker network ls | grep -i 'spark-net' | awk -F ' ' '{print $1}'`
 if [[ $net = "" ]];then
-    echo "spark-net not runing."
+    echo "no spark-net runing."
 else
     echo "spark-net runing..."
 fi
