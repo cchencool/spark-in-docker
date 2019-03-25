@@ -8,11 +8,13 @@
 
 |  directory | description  |
 |:-:|:-:|
-| bin | docker container mode scripts.<br/> All images startup in local machine. |
-| sbin  | Docker **swarm** deployment scripts.<br/> Spark nodes are deployed on docker machines |
-| pkg  | install packages for image building.<br/> Including spark / java / hadoop  |
+| bin | docker container mode scripts. All images startup in local machine. |
+| sbin  | Docker **swarm** deployment scripts. Spark nodes are deployed on docker machines |
+| pkg  | install packages for image building. Including spark / java / hadoop  |
 | config | configuration files for image building and services. |
-| setup.sh | Script for manually setup other configurations.<br/> such as jupyter-notebook etc.|
+| code | some test code |
+| setup.sh | Script for manually setup other configurations. such as jupyter-notebook etc.|
+| build-image.sh | Script for image building |
 | Dockerfile  | Spark image. Base on Ubunut:18.04  |
 -----
 ## Next Steps:
