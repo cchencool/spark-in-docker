@@ -3,7 +3,7 @@ version: "3"
 services:
 
   master:
-   image: cchencool/spark:1.0
+   image: cchencool/spark:latest
    command: [ "sh", "-c", "source ~/.bashrc; service ssh start; /opt/spark/sbin/start-master.sh -h master > log; bash" ]
    hostname: master
    tty: true
@@ -28,7 +28,7 @@ services:
      - 8080:8080
 
   worker:
-    image: cchencool/spark:1.0
+    image: cchencool/spark:latest
     command: [ "sh", "-c", "source ~/.bashrc; service ssh start; /opt/spark/sbin/start-slave.sh spark://master:7077 > log; bash" ]
     tty: true
     hostname: worker
