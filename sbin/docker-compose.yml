@@ -9,6 +9,7 @@ services:
    tty: true
    networks: 
      - spark-net
+  #  volumes: 
    environment: 
      MASTER: spark://master:7077
      SPARK_PUBLIC_DNS: ${EXTERNAL_IP}

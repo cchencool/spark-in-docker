@@ -21,3 +21,8 @@
 1. data upload
 2. docker volume
 3. hadoop/hdfs
+
+-----
+## References:
+* [hadoop-cluster-docker](https://github.com/kiwenlau/hadoop-cluster-docker)
+* [spark-docker-swarm](https://github.com/testdrivenio/spark-docker-swarm)
