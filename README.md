@@ -23,9 +23,8 @@
 
 -----
 ## Next Steps:
-1. data upload
-2. docker volume
-3. hadoop/hdfs
+1. data upload - using docker-machine virtualBox as driver. directly shareing folder with host. Should use NFS in production.
+2. task submission
 
 -----
 ## References:
