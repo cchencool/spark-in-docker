@@ -27,7 +27,7 @@ while ([[ $? -eq 0 ]] && [[ $check_counter -lt 10 ]]); do
     ((check_counter=check_counter+1))
 done
 docker stack ps spark &> /dev/null
-if [[ $? -eq 1 ]];then
+if [[ $? -eq 0 ]];then
     echo "success"
 else
     echo "failed"

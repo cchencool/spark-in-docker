@@ -1,4 +1,8 @@
 
+docker/pkg/hadoop*
+docker/pkg/spark*
+docker/pkg/jdk*
+
 .vscode
 # Byte-compiled / optimized / DLL files
 __pycache__/

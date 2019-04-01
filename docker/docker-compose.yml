@@ -9,7 +9,8 @@ services:
    tty: true
    networks: 
      - spark-net
-  #  volumes: 
+   volumes: # host_src:container_dest
+     - /nfsshare:/root/nfsshare
    environment: 
      MASTER: spark://master:7077
      SPARK_PUBLIC_DNS: ${EXTERNAL_IP}
@@ -27,6 +28,7 @@ services:
      - 6066:6066
      - 7077:7077
      - 8080:8080
+     - 8888:8888
 
   worker:
     image: cchencool/spark:latest
@@ -37,6 +39,8 @@ services:
       # SPARK_WORKER_CORES: 2
       # SPARK_WORKER_MEMORY: 1g
       SPARK_PUBLIC_DNS: ${EXTERNAL_IP}
+    volumes: 
+      - /nfsshare:/root/nfsshare
     networks: 
       - spark-net
     depends_on: 
