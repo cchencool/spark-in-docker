@@ -1,4 +1,4 @@
-# Spark cluster in Docker / Docker Swarm
+# Spark Cluster in Docker / Docker Swarm
 This part is to deploy a spark cluster using docker swarm. Implemented in following steps.
 
 1. Deploy spark cluster in docker containers
