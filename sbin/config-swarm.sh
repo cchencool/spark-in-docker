@@ -48,7 +48,7 @@ check_succ()
     fi
 }
 
-if [[ $create ]]; then
+if [[ $create == true ]]; then
     echo "creating $node_counts docker machine..."
     for ((i=1; i<=$node_counts; i++));do
       docker-machine create \
