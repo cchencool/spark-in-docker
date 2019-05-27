@@ -5,13 +5,39 @@
 dir=`dirname $0`
 filename=$(basename $0)
 
-if [[ $1 = "--help" ]]; then
-    echo "usage: ${filename} [node_counts: default 3] [node_prefix: default myvm]"
+for i in "$@"
+do
+case $i in
+    -h|--help)
+    echo "usage: ${filename} [-c|--create] [-n=|--num=3] [-p|--prefix=myvm]"
     exit 0
-fi
+    ;;
+    -c|--create)
+    create=ture
+    ;;
+    -n=*|--num=*)
+    node_counts="${i#*=}"
+    ;;
+    -p=*|--prefix=*)
+    node_prefix="${i#*=}"
+    ;;
+    --default)
+    DEFAULT=YES
+    ;;
+    *)
+    # unknown option
+    ;;
+esac
+done
 
-node_counts=${1:-3}
-node_prefix=${2:-"myvm"}
+node_counts=${node_counts:-3}
+node_prefix=${node_prefix:-"myvm"}
+create=${create:-false}
+
+# echo $node_counts
+# echo $node_prefix
+# echo $create
+# exit
 
 check_succ()
 {
@@ -22,12 +48,14 @@ check_succ()
     fi
 }
 
-# echo "creating $node_counts docker machine..."
-# for ((i=1; i<=$node_counts; i++));do
-#   docker-machine create \
-#     --driver virtualbox\
-#     ${node_prefix}$i;
-# done
+if [[ $create ]]; then
+    echo "creating $node_counts docker machine..."
+    for ((i=1; i<=$node_counts; i++));do
+      docker-machine create \
+        --driver virtualbox\
+        ${node_prefix}$i;
+    done
+fi
 
 # for i in {1..$node_counts} ; do
 for ((i=1; i<=$node_counts; i++));do
