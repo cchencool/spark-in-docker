@@ -97,7 +97,7 @@ Scripts under this folder manage containers directly. And all images startup in 
 
    ![graph](./docs/resources/vm_nodes.png)
 
-3. Configurate share folder (NFS, if physical machine) for your docker machines.
+3. Configurate share folder (NFS, if physical machine) for **ALL** your docker machines.
 
    ![ graph](./docs/resources/share-folder.png)
 
