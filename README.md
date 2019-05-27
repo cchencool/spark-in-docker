@@ -95,11 +95,11 @@ Scripts under this folder manage containers directly. And all images startup in 
 
 2. Running command `./config-swarm.sh --create --num=3 --prefix=myvm` to create a virtual environment of 3 machine cluster with [virtualbox](https://www.virtualbox.org/wiki/Downloads) as driver.
 
-   ![graph](/Users/Chen/Development/Work/Lenovo/code/hyperminer/mlstudiosdk/sparkml/docs/resources/vm_nodes.png)
+   ![graph](./docs/resources/vm_nodes.png)
 
 3. Configurate share folder (NFS, if physical machine) for your docker machines.
 
-   ![ graph](/Users/Chen/Development/Work/Lenovo/code/hyperminer/mlstudiosdk/sparkml/docs/resources/share-folder.png)
+   ![ graph](./docs/resources/share-folder.png)
 
 4. Run commad `docker-machine restart myvm1 myvm2 myvm3` to restart you docker machines. Making the shared folder effective.
 
@@ -187,7 +187,7 @@ Scripts under this folder manage containers directly. And all images startup in 
 
 10. Using the infomation printted out by the script to connect spark cluster. Checking the web UI.
 
-    ![graph](/Users/Chen/Development/Work/Lenovo/code/hyperminer/mlstudiosdk/sparkml/docs/resources/spark-web-ui.png)
+    ![graph](./docs/resources/spark-web-ui.png)
 
 11. You can connect to your container using commands below:
 
